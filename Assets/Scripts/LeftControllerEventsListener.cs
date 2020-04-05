@@ -435,7 +435,7 @@
                     shapeAudioSource = shape.AddComponent<AudioSource>();
                     loadSound(shapeAudioSource, objectProperties);
 
-                    shape.AddComponent<OscilateObject>();
+                    shape.AddComponent<OscilatePlayingObject>();
                     shape.AddComponent<VRTK_InteractableObject>();
                     shape.GetComponent<VRTK_InteractableObject>().enabled = true;
                     shape.GetComponent<VRTK_InteractableObject>().isGrabbable = true;
@@ -464,7 +464,7 @@
                     shapeAudioSource = shape.AddComponent<AudioSource>();
                     loadSound(shapeAudioSource, objectProperties);
 
-                    shape.AddComponent<OscilateObject>();
+                    shape.AddComponent<OscilatePlayingObject>();
                     shape.AddComponent<VRTK_InteractableObject>();
                     shape.GetComponent<VRTK_InteractableObject>().enabled = true;
                     shape.GetComponent<VRTK_InteractableObject>().isGrabbable = true;
