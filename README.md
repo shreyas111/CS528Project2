@@ -8,3 +8,4 @@ CS528Project2 Sound in VR
 3. Pause Icon: https://icons8.com/icons/set/pause
 4. Stop Icon: https://icons8.com/icons/set/stop
 5. Replay Icon: https://icons8.com/icons/set/replay
+6. Loop Icon: https://icons8.com/icons/set/loop
