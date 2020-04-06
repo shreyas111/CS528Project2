@@ -6,6 +6,8 @@
 
     public class RightControllerEventsListener : MonoBehaviour
     {
+        bool canvasMenuActive;
+        public GameObject CanvasMenu;
         public enum EventQuickSelect
         {
             Custom,
@@ -105,6 +107,10 @@
             controllerEvents.MiddleFingerSenseAxisChanged += DoMiddleFingerSenseAxisChanged;
             controllerEvents.RingFingerSenseAxisChanged += DoRingFingerSenseAxisChanged;
             controllerEvents.PinkyFingerSenseAxisChanged += DoPinkyFingerSenseAxisChanged;
+        }
+        void Awake()
+        {
+            canvasMenuActive = false;
         }
 
         private void OnDisable()
@@ -517,6 +523,10 @@
         {
             if (buttonTwoButtonEvents)
             {
+
+                canvasMenuActive = !canvasMenuActive;
+                CanvasMenu.SetActive(canvasMenuActive);
+
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON TWO", "pressed down", e);
             }
         }

@@ -502,7 +502,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.397723e+31, y: 1.6871011e-22, z: 5.75e-43, w: 8.3e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1287,6 +1287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4913dede13980c47bc7e071265d426b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasMenu: {fileID: 0}
   quickSelect: 2
   triggerButtonEvents: 1
   gripButtonEvents: 1

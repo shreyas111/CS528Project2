@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SoundShapes.unity
+    guid: 8751355808ec1674c8bcee7d1699ae32
+  - enabled: 1
+    path: Assets/Scenes/SoundPlacement.unity
+    guid: bb44cb58ef03a0b4ba02276a7589ca4e
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
