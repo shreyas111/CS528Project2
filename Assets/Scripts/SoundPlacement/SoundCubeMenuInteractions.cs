@@ -13,8 +13,8 @@ public class SoundCubeMenuInteractions : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        source= this.GetComponent<AudioSource>();
-        isLooping = source.loop;
+        //source= this.GetComponent<AudioSource>();
+        //isLooping = source.loop;
         
     }
 
@@ -29,9 +29,16 @@ public class SoundCubeMenuInteractions : MonoBehaviour
         Debug.Log("Menu Enabled and disbaled");
 
     }
-    public void playPause()
+    private void getAudioSource(string objectName)
     {
-        if(source.isPlaying)
+        source = GameObject.Find(objectName).GetComponent<AudioSource>();
+        isLooping = source.loop;
+    }
+    public void playPause(string objectName)
+    {
+        Debug.Log("Hello");
+        getAudioSource(objectName);
+        if (source.isPlaying)
         {
             source.Pause();
         }
@@ -41,13 +48,15 @@ public class SoundCubeMenuInteractions : MonoBehaviour
         }
        
     }
-    public void loopUnloop()
+    public void loopUnloop(string objectName)
     {
+        getAudioSource(objectName);
         isLooping = !isLooping;
         source.loop = isLooping;
     }
-    public void stop()
+    public void stop(string objectName)
     {
+        getAudioSource(objectName);
         if (source.isPlaying)
         {
             source.Stop();

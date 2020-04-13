@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,35 +7,45 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public GameObject canvasMenu;
-    public GameObject soundCubeMenu;    
+    public GameObject soundMenu;    
     public string activeMenuName;
+    public SoundMenuInteractions soundMenuInteractionsScript;
 
     private void Awake()
     {
         activeMenuName = "";
+        soundMenuInteractionsScript = this.GetComponent<SoundMenuInteractions>();
+        Debug.Log("Sound Menu Interaction Script is " + soundMenuInteractionsScript);
     }
 
-    public void activateDeactivateMenus(string menuName)
+    public void activateDeactivateMenus(string parameters)
     {
-      
+        string[] splitArray = parameters.Split(new Char[] { ',' });
+        string menuName = splitArray[0];
+        string objectName = splitArray[1];
+
+        //Debug.Log("Menu Name is: " + menuName);
+        //Debug.Log("Object Name is: " + objectName);
+
         switch (menuName)
         {
 
-            case "SoundCubeMenu":
-                Debug.Log("MenuName is" + menuName);
-                if(activeMenuName.Equals("SoundCubeMenu"))
+            case "SoundMenu":
+                if(activeMenuName.Equals("SoundMenu"))
                 {
-                    
-                    soundCubeMenu.SetActive(false);
+
+                    soundMenu.SetActive(false);
+                    soundMenuInteractionsScript.SoundObjectName = "";
                     activeMenuName = "";
                 }
                 else
                 {
                     canvasMenu.SetActive(false);
-                    soundCubeMenu.SetActive(true);
-                    setMenuValues("SoundCubeMenu");
+                    soundMenu.SetActive(true);
+                    soundMenuInteractionsScript.SoundObjectName = objectName;
 
-                    activeMenuName = "SoundCubeMenu";
+                    setMenuValues("SoundMenu");
+                    activeMenuName = "SoundMenu";
                 }
                 break;
             case "CanvasMenu":
@@ -42,13 +53,15 @@ public class MenuManager : MonoBehaviour
                 if (activeMenuName.Equals("CanvasMenu"))
                 {
                     canvasMenu.SetActive(false);
+                    soundMenuInteractionsScript.SoundObjectName = "";
                     activeMenuName = "";
 
                 }
                 else
                 {
-                    soundCubeMenu.SetActive(false);
-                    canvasMenu.SetActive(true);                    
+                    soundMenu.SetActive(false);
+                    canvasMenu.SetActive(true);
+                    soundMenuInteractionsScript.SoundObjectName = "";
                     activeMenuName = "CanvasMenu";
                 }
                 break;
@@ -59,9 +72,10 @@ public class MenuManager : MonoBehaviour
     {
         switch (menuName)
         {
-            case "SoundCubeMenu":
-                AudioSource soundCube = GameObject.Find("SoundCube").GetComponent<AudioSource>();
-                foreach (Transform trans in soundCubeMenu.GetComponentInChildren<Transform>())
+            case "SoundMenu":
+                AudioSource soundCube = GameObject.Find(soundMenuInteractionsScript.SoundObjectName).GetComponent<AudioSource>();
+                Debug.Log("Sound Object Name is" + soundMenuInteractionsScript.SoundObjectName);
+                foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
                 {
                     if (trans.name == "SliderVolume")
                     {
