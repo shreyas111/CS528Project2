@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject canvasMenu;
-    public GameObject soundMenu;    
-    public string activeMenuName;
-    public SoundMenuInteractions soundMenuInteractionsScript;
+    public GameObject soundMenu;
+    public GameObject audioMixerMenu;
+    string activeMenuName;
+    SoundMenuInteractions soundMenuInteractionsScript;
+    public AudioMixer masterMixer;
 
     private void Awake()
     {
@@ -42,6 +45,7 @@ public class MenuManager : MonoBehaviour
                 else
                 {
                     canvasMenu.SetActive(false);
+                    audioMixerMenu.SetActive(false);
                     soundMenu.SetActive(true);
                     soundMenuInteractionsScript.SoundObjectName = objectName;
 
@@ -61,12 +65,65 @@ public class MenuManager : MonoBehaviour
                 else
                 {
                     soundMenu.SetActive(false);
+                    audioMixerMenu.SetActive(false);
                     canvasMenu.SetActive(true);
                     soundMenuInteractionsScript.SoundObjectName = "";
                     activeMenuName = "CanvasMenu";
                 }
                 break;
+            case "AudioMixerMenu":
+                if (activeMenuName.Equals("AudioMixerMenu"))
+                {
+                    audioMixerMenu.SetActive(false);
+                    soundMenuInteractionsScript.SoundObjectName = "";
+                    activeMenuName = "";
 
+                }
+                else
+                {
+                    soundMenu.SetActive(false);
+                    canvasMenu.SetActive(false);
+                    audioMixerMenu.SetActive(true);
+                    soundMenuInteractionsScript.SoundObjectName = "";
+                    activeMenuName = "AudioMixerMenu";
+                    setAudioMixerMenuValues();
+                }
+                break;
+
+        }
+    }
+    public void setAudioMixerMenuValues()
+    {
+        foreach (Transform trans in audioMixerMenu.GetComponentInChildren<Transform>())
+        {
+            if (trans.name == "SliderMaster")
+            {
+                float output;
+                masterMixer.GetFloat("BGMasterVolume", out output);
+                trans.gameObject.GetComponent<Slider>().value = output;
+
+            }
+            if (trans.name == "SliderBGMusic")
+            {
+                float output;
+                masterMixer.GetFloat("BGMasterVolume", out output);
+                trans.gameObject.GetComponent<Slider>().value = output;
+
+            }
+            if (trans.name == "SliderBGChatter")
+            {
+                float output;
+                masterMixer.GetFloat("BGMasterVolume", out output);
+                trans.gameObject.GetComponent<Slider>().value = output;
+
+            }
+            if (trans.name == "SliderBGAirCon")
+            {
+                float output;
+                masterMixer.GetFloat("BGMasterVolume", out output);
+                trans.gameObject.GetComponent<Slider>().value = output;
+
+            }
         }
     }
     public void setMenuValues(string menuName)

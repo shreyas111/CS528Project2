@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 
 public class SoundMenuInteractions : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SoundMenuInteractions : MonoBehaviour
     private string soundObjectName;
     public Material green;
     public Material red;
+    public AudioMixer masterMixer;
 
     public string SoundObjectName
     {
@@ -247,5 +249,29 @@ public class SoundMenuInteractions : MonoBehaviour
         {
             source.rolloffMode = AudioRolloffMode.Custom;
         }
+    }
+
+    public void setBGMasterVolume(float value)
+    {
+        masterMixer.SetFloat("BGMasterVolume", value);
+        float output;
+        masterMixer.GetFloat("BGMasterVolume", out output);
+        Debug.Log("Master Background Volume is:" + output);
+
+    }
+
+    public void setBGMusicVolume(float value)
+    {
+        masterMixer.SetFloat("BGMusicVolume",value);
+    }
+
+    public void setBGChatterVolume(float value)
+    {
+        masterMixer.SetFloat("BGChatterVolume", value);
+    }
+    public void setBGAirConVolume(float value)
+    {
+        masterMixer.SetFloat("BGACVolume", value);
+       
     }
 }
