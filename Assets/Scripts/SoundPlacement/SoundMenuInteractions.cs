@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SoundMenuInteractions : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class SoundMenuInteractions : MonoBehaviour
     bool isLooping;
     public GameObject soundMenu;
     private string soundObjectName;
+    public Material green;
+    public Material red;
 
     public string SoundObjectName
     {
@@ -40,10 +43,58 @@ public class SoundMenuInteractions : MonoBehaviour
         if (source.isPlaying)
         {
             source.Pause();
+            foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
+            {
+                if (trans.name == "beveledSurface52")
+                {
+                    trans.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                }
+                if (trans.name == "beveledSurface53")
+                {
+                    trans.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                }
+                if (trans.name == "beveledSurface53")
+                {
+                    trans.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                }
+            }
         }
         else
         {
             source.Play();
+            ;
+            GameObject speakerPart=GameObject.Find(whichSoundObjectName).transform.Find("Speaker/beveledSurface52").gameObject;
+            speakerPart.GetComponent<MeshRenderer>().materials[0].color = Color.green;
+            speakerPart.GetComponent<MeshRenderer>().materials[0] = green;
+            speakerPart.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+            speakerPart.GetComponent<Renderer>().material.SetColor("_TintColor", Color.green);
+
+            //GameObject speakerPart2 = GameObject.Find(whichSoundObjectName).transform.Find("Speaker/beveledSurface53").gameObject;
+            //speakerPart2.GetComponent<MeshRenderer>().materials[0].color = Color.green;
+            //speakerPart2.GetComponent<Renderer>().material.SetColor("_TintColor", Color.green);
+
+            //speakerPart.GetComponent<Renderer>().material.color = Color.green;
+            GameObject speakerPart3 = GameObject.Find(whichSoundObjectName).transform.Find("Speaker/beveledSurface54").gameObject;
+            //speakerPart2.GetComponent<MeshRenderer>().materials[0].color = Color.green;
+            //speakerPart3.GetComponent<Renderer>().material.SetColor("_TintColor", Color.green);
+            //foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
+            //{
+            //    if (trans.name == "Speaker")
+            //    {
+            //        if (trans.name == "beveledSurface52")
+            //        {
+            //            trans.gameObject.GetComponent<Renderer>().material.color = Color.green;
+            //        }
+            //        if (trans.name == "beveledSurface53")
+            //        {
+            //            trans.gameObject.GetComponent<Renderer>().material.color = Color.green;
+            //        }
+            //        if (trans.name == "beveledSurface53")
+            //        {
+            //            trans.gameObject.GetComponent<Renderer>().material.color = Color.green;
+            //        }
+            //    }
+            //}
         }
 
     }
@@ -59,9 +110,10 @@ public class SoundMenuInteractions : MonoBehaviour
         if (source.isPlaying)
         {
             source.Stop();
+
         }
     }
-    public void UpdateVolume()
+    public void UpdateVolume(float value)
     {
         getAudioSource(soundObjectName);
 
@@ -70,6 +122,10 @@ public class SoundMenuInteractions : MonoBehaviour
             if (trans.name == "SliderVolume")
             {
                 source.volume = trans.gameObject.GetComponent<Slider>().value;
+            }
+            if (trans.name == "TextVolumeValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString("0.00");
             }
         }
     }
@@ -173,6 +229,23 @@ public class SoundMenuInteractions : MonoBehaviour
             {
                 source.maxDistance = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
             }
+        }
+    }
+
+    public void updateRolloff(int value)
+    {
+        getAudioSource(soundObjectName);
+        if (value==0)
+        {
+            source.rolloffMode = AudioRolloffMode.Linear;
+        }
+        if (value == 1)
+        {
+            source.rolloffMode = AudioRolloffMode.Logarithmic;
+        }
+        if (value == 2)
+        {
+            source.rolloffMode = AudioRolloffMode.Custom;
         }
     }
 }

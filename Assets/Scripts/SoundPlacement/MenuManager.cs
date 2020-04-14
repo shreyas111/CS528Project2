@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
@@ -116,6 +117,29 @@ public class MenuManager : MonoBehaviour
                     if (trans.name == "SliderMaxDistance")
                     {
                         trans.gameObject.GetComponent<Slider>().value = soundCube.maxDistance;
+                    }
+                    if (trans.name == "TextName")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundMenuInteractionsScript.SoundObjectName;
+                    }
+                    if (trans.name == "TextVolumeValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.volume.ToString();
+                    }
+                    if (trans.name == "Dropdown")
+                    {
+                        if (soundCube.rolloffMode == AudioRolloffMode.Linear)
+                        {
+                            trans.gameObject.GetComponent<TMP_Dropdown>().value = 0;
+                        }
+                        if (soundCube.rolloffMode == AudioRolloffMode.Logarithmic)
+                        {
+                            trans.gameObject.GetComponent<TMP_Dropdown>().value = 1;
+                        }
+                        if (soundCube.rolloffMode == AudioRolloffMode.Custom)
+                        {
+                            trans.gameObject.GetComponent<TMP_Dropdown>().value = 2;
+                        }
                     }
                 }
                         
