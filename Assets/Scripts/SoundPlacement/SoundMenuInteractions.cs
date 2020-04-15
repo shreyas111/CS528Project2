@@ -5,16 +5,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Audio;
+using VRTK;
 
 public class SoundMenuInteractions : MonoBehaviour
 {
     AudioSource source;
     bool isLooping;
     public GameObject soundMenu;
-    private string soundObjectName;
+    public string soundObjectName;
     public Material green;
     public Material red;
     public AudioMixer masterMixer;
+
+
+    //For Changing Radial Menu Symbols.
+    private GameObject panel;
+    public Sprite PlaySymbol;
+    public Sprite PauseSymbol;
+
+
 
     public string SoundObjectName
     {
@@ -36,6 +45,7 @@ public class SoundMenuInteractions : MonoBehaviour
     private void getAudioSource(string objectName)
     {
         source = GameObject.Find(objectName).GetComponent<AudioSource>();
+        panel = GameObject.Find(objectName).transform.Find("RadialMenu1/RadialMenuUI/Panel").gameObject;        
         isLooping = source.loop;
     }
     public void playPause(string whichSoundObjectName)
@@ -45,56 +55,81 @@ public class SoundMenuInteractions : MonoBehaviour
         if (source.isPlaying)
         {
             source.Pause();
-            foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
-            {
-                if (trans.name == "beveledSurface52")
-                {
-                    trans.gameObject.GetComponent<Renderer>().material.color = Color.red;
-                }
-                if (trans.name == "beveledSurface53")
-                {
-                    trans.gameObject.GetComponent<Renderer>().material.color = Color.red;
-                }
-                if (trans.name == "beveledSurface53")
-                {
-                    trans.gameObject.GetComponent<Renderer>().material.color = Color.red;
-                }
-            }
+            panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PlaySymbol;
+            panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
+
+            //foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
+            //{
+            //    if (trans.name == "Sphere")
+            //    {
+            //        MeshRenderer sphereRenderer = trans.gameObject.GetComponent<MeshRenderer>();
+            //        sphereRenderer.material = red;
+            //    }
+            //}
         }
         else
         {
             source.Play();
-            ;
-            GameObject speakerPart=GameObject.Find(whichSoundObjectName).transform.Find("Speaker/beveledSurface52").gameObject;
-            speakerPart.GetComponent<MeshRenderer>().materials[0].color = Color.green;
-            speakerPart.GetComponent<MeshRenderer>().materials[0] = green;
-            speakerPart.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-            speakerPart.GetComponent<Renderer>().material.SetColor("_TintColor", Color.green);
+            panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PauseSymbol ;
+            panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
+
+            //GameObject marker = GameObject.Find(whichSoundObjectName).transform.Find("Sphere").gameObject;
+
+            //marker.GetComponent<MeshRenderer>().materials[0].color = Color.green;
+            //marker.GetComponent<MeshRenderer>().material.color = Color.green;
+            //marker.GetComponent<Renderer>().material = green;
+            //speakerPart.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+            //speakerPart.GetComponent<Renderer>().material.SetColor("_TintColor", Color.green);
 
             //GameObject speakerPart2 = GameObject.Find(whichSoundObjectName).transform.Find("Speaker/beveledSurface53").gameObject;
             //speakerPart2.GetComponent<MeshRenderer>().materials[0].color = Color.green;
             //speakerPart2.GetComponent<Renderer>().material.SetColor("_TintColor", Color.green);
 
             //speakerPart.GetComponent<Renderer>().material.color = Color.green;
-            GameObject speakerPart3 = GameObject.Find(whichSoundObjectName).transform.Find("Speaker/beveledSurface54").gameObject;
+            //GameObject speakerPart3 = GameObject.Find(whichSoundObjectName).transform.Find("Speaker/beveledSurface54").gameObject;
             //speakerPart2.GetComponent<MeshRenderer>().materials[0].color = Color.green;
             //speakerPart3.GetComponent<Renderer>().material.SetColor("_TintColor", Color.green);
             //foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
             //{
+            //    if (trans.name == "Sphere")
+            //    {
+            //        MeshRenderer sphereRenderer = trans.gameObject.GetComponent<MeshRenderer>();
+            //        sphereRenderer.material = green;
+
+            //        //Material[] mat = sphereRenderer.materials;
+            //        //Debug.Log("Size of Materials is" + mat.Length);
+            //        //Debug.Log("Size of Materials 0 is" + mat[0].name);
+            //        //Debug.Log("Size of Materials 1 is" + mat[1].name);
+            //        //Material[] newMaterials = new Material[] { green };
+            //        //sphereRenderer.materials = newMaterials;
+            //        //sphereRenderer.enabled = true;                
+            //        //sphereRenderer.material = green;
+            //    }
+            //}
+            //foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
+            //{
             //    if (trans.name == "Speaker")
             //    {
-            //        if (trans.name == "beveledSurface52")
+            //        foreach (Transform trans1 in trans.gameObject.GetComponentInChildren<Transform>())
             //        {
-            //            trans.gameObject.GetComponent<Renderer>().material.color = Color.green;
+            //            if (trans.name == "beveledSurface52")
+            //            {
+            //                MeshRenderer sphereRenderer = trans1.gameObject.GetComponent<MeshRenderer>();
+            //                sphereRenderer.material = green;
+            //            }
+            //            if (trans.name == "beveledSurface53")
+            //            {
+            //                MeshRenderer sphereRenderer = trans1.gameObject.GetComponent<MeshRenderer>();
+            //                sphereRenderer.material = green;
+            //            }
+            //            if (trans.name == "beveledSurface54")
+            //            {
+            //                MeshRenderer sphereRenderer = trans1.gameObject.GetComponent<MeshRenderer>();
+            //                sphereRenderer.material = green;
+            //            }
             //        }
-            //        if (trans.name == "beveledSurface53")
-            //        {
-            //            trans.gameObject.GetComponent<Renderer>().material.color = Color.green;
-            //        }
-            //        if (trans.name == "beveledSurface53")
-            //        {
-            //            trans.gameObject.GetComponent<Renderer>().material.color = Color.green;
-            //        }
+
+
             //    }
             //}
         }
@@ -112,6 +147,16 @@ public class SoundMenuInteractions : MonoBehaviour
         if (source.isPlaying)
         {
             source.Stop();
+            panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PlaySymbol;
+            panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
+            //foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
+            //{
+            //    if (trans.name == "Sphere")
+            //    {
+            //        MeshRenderer sphereRenderer = trans.gameObject.GetComponent<MeshRenderer>();
+            //        sphereRenderer.material = red;
+            //    }
+            //}
 
         }
     }
@@ -120,7 +165,7 @@ public class SoundMenuInteractions : MonoBehaviour
         getAudioSource(soundObjectName);
 
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
-        {          
+        {
             if (trans.name == "SliderVolume")
             {
                 source.volume = trans.gameObject.GetComponent<Slider>().value;
@@ -237,7 +282,7 @@ public class SoundMenuInteractions : MonoBehaviour
     public void updateRolloff(int value)
     {
         getAudioSource(soundObjectName);
-        if (value==0)
+        if (value == 0)
         {
             source.rolloffMode = AudioRolloffMode.Linear;
         }
@@ -262,7 +307,7 @@ public class SoundMenuInteractions : MonoBehaviour
 
     public void setBGMusicVolume(float value)
     {
-        masterMixer.SetFloat("BGMusicVolume",value);
+        masterMixer.SetFloat("BGMusicVolume", value);
     }
 
     public void setBGChatterVolume(float value)
@@ -272,6 +317,6 @@ public class SoundMenuInteractions : MonoBehaviour
     public void setBGAirConVolume(float value)
     {
         masterMixer.SetFloat("BGACVolume", value);
-       
+
     }
 }
