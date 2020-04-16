@@ -11,17 +11,19 @@ public class SoundMenuInteractions : MonoBehaviour
 {
     AudioSource source;
     bool isLooping;
+
     public GameObject soundMenu;
+    public GameObject AudioMixerMenu;
     public string soundObjectName;
     public Material green;
     public Material red;
     public AudioMixer masterMixer;
 
 
-    //For Changing Radial Menu Symbols.
-    private GameObject panel;
-    public Sprite PlaySymbol;
-    public Sprite PauseSymbol;
+    ////For Changing Radial Menu Symbols.
+    //private GameObject panel;
+    //public Sprite PlaySymbol;
+    //public Sprite PauseSymbol;
 
 
 
@@ -45,7 +47,10 @@ public class SoundMenuInteractions : MonoBehaviour
     private void getAudioSource(string objectName)
     {
         source = GameObject.Find(objectName).GetComponent<AudioSource>();
-        panel = GameObject.Find(objectName).transform.Find("RadialMenu1/RadialMenuUI/Panel").gameObject;        
+
+        //Added for Changing Menu Icons
+        //panel = GameObject.Find(objectName).transform.Find("RadialMenu/RadialMenuUI/Panel").gameObject;
+
         isLooping = source.loop;
     }
     public void playPause(string whichSoundObjectName)
@@ -55,8 +60,10 @@ public class SoundMenuInteractions : MonoBehaviour
         if (source.isPlaying)
         {
             source.Pause();
-            panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PlaySymbol;
-            panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
+            
+            //Added for changing Menu Icons
+            //panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PlaySymbol;
+            //panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
 
             //foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
             //{
@@ -70,8 +77,10 @@ public class SoundMenuInteractions : MonoBehaviour
         else
         {
             source.Play();
-            panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PauseSymbol ;
-            panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
+
+            //Added for Changing Menu Icons
+            //panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PauseSymbol ;
+            //panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
 
             //GameObject marker = GameObject.Find(whichSoundObjectName).transform.Find("Sphere").gameObject;
 
@@ -147,8 +156,13 @@ public class SoundMenuInteractions : MonoBehaviour
         if (source.isPlaying)
         {
             source.Stop();
-            panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PlaySymbol;
-            panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
+
+            //Added for Changing Menu Icons
+            //panel.GetComponent<VRTK_RadialMenu>().buttons[1].ButtonIcon = PlaySymbol;
+            //panel.GetComponent<VRTK_RadialMenu>().RegenerateButtons();
+
+
+
             //foreach (Transform trans in GameObject.Find(whichSoundObjectName).GetComponentInChildren<Transform>())
             //{
             //    if (trans.name == "Sphere")
@@ -176,7 +190,24 @@ public class SoundMenuInteractions : MonoBehaviour
             }
         }
     }
-    public void updatePitch(string objectName)
+
+    public void updatePriority(float value)
+    {
+        getAudioSource(soundObjectName);
+        foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
+        {
+            if (trans.name == "SliderPriority")
+            {
+                source.priority = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
+            }
+            if (trans.name == "TextPriorityValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(value).ToString();
+            }
+        }
+    }
+
+    public void updatePitch(float value)
     {
         getAudioSource(soundObjectName);
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
@@ -185,20 +216,14 @@ public class SoundMenuInteractions : MonoBehaviour
             {
                 source.pitch = trans.gameObject.GetComponent<Slider>().value;
             }
-        }
-    }
-    public void updatePriority(string objectName)
-    {
-        getAudioSource(soundObjectName);
-        foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
-        {
-            if (trans.name == "SliderPitch")
+            if (trans.name == "TextPitchValue")
             {
-                source.priority = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString("0.00");
             }
         }
     }
-    public void updateStereoPan(string objectName)
+
+    public void updateStereoPan(float value)
     {
         getAudioSource(soundObjectName);
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
@@ -207,10 +232,14 @@ public class SoundMenuInteractions : MonoBehaviour
             {
                 source.panStereo = trans.gameObject.GetComponent<Slider>().value;
             }
+            if (trans.name == "TextStereoPanValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString("0.00");
+            }
         }
 
     }
-    public void updateSpatialBlend(string objectName)
+    public void updateSpatialBlend(float value)
     {
         getAudioSource(soundObjectName);
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
@@ -219,9 +248,13 @@ public class SoundMenuInteractions : MonoBehaviour
             {
                 source.spatialBlend = trans.gameObject.GetComponent<Slider>().value;
             }
+            if (trans.name == "TextSpatialBlendValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString("0.00");
+            }
         }
     }
-    public void updateReverbMix(string objectName)
+    public void updateReverbMix(float value)
     {
         getAudioSource(soundObjectName);
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
@@ -230,9 +263,13 @@ public class SoundMenuInteractions : MonoBehaviour
             {
                 source.reverbZoneMix = trans.gameObject.GetComponent<Slider>().value;
             }
+            if (trans.name == "TextReverbMixValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString("0.00");
+            }
         }
     }
-    public void updateDoplerLevel(string objectName)
+    public void updateDoplerLevel(float value)
     {
         getAudioSource(soundObjectName);
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
@@ -241,9 +278,14 @@ public class SoundMenuInteractions : MonoBehaviour
             {
                 source.dopplerLevel = trans.gameObject.GetComponent<Slider>().value;
             }
+            if (trans.name == "TextDopplerLevelValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString("0.00");
+            }
         }
     }
-    public void updateSpread(string objectName)
+    //Spread is interegr from 0 to 360
+    public void updateSpread(float value)
     {
         getAudioSource(soundObjectName);
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
@@ -252,9 +294,14 @@ public class SoundMenuInteractions : MonoBehaviour
             {
                 source.spread = trans.gameObject.GetComponent<Slider>().value;
             }
+            if (trans.name == "TextSpreadValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(value).ToString();
+            }
         }
     }
-    public void updateMinDistance(string objectName)
+    //Spread is interegr from 1 to 1
+    public void updateMinDistance(float value)
     {
         getAudioSource(soundObjectName);
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
@@ -263,10 +310,82 @@ public class SoundMenuInteractions : MonoBehaviour
             {
                 source.minDistance = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
             }
+            if (trans.name == "TextMinDistanceValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(value).ToString();
+            }
         }
 
     }
-    public void updateMaxDistance(string objectName)
+
+    public void resetValues()
+    {
+        getAudioSource(soundObjectName);
+        foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
+        {
+            if (trans.name == "SliderVolume")
+            {
+                trans.gameObject.GetComponent<Slider>().value = 1f;
+            }
+            if (trans.name == "TextVolumeValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(1).ToString();
+            }
+
+
+            if (trans.name == "SliderPitch")
+            {
+                trans.gameObject.GetComponent<Slider>().value = 1;
+            }
+            if (trans.name == "TextPitchValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = 1f.ToString();
+            }
+
+
+            if (trans.name == "SliderPriority")
+            {
+                trans.gameObject.GetComponent<Slider>().value = Convert.ToInt32(128);
+            }
+            if (trans.name == "TextPriorityValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(128).ToString();
+            }
+
+
+            //if (trans.name == "SliderStereoPan")
+            //{
+            //    trans.gameObject.GetComponent<Slider>().value = soundCube.panStereo;
+            //}
+            //if (trans.name == "SliderSpatialBlend")
+            //{
+            //    trans.gameObject.GetComponent<Slider>().value = soundCube.spatialBlend;
+            //}
+            //if (trans.name == "SliderReverbMix")
+            //{
+            //    trans.gameObject.GetComponent<Slider>().value = soundCube.reverbZoneMix;
+            //}
+            //if (trans.name == "SliderDopplerLevel")
+            //{
+            //    trans.gameObject.GetComponent<Slider>().value = soundCube.dopplerLevel;
+            //}
+            //if (trans.name == "SliderSpread")
+            //{
+            //    trans.gameObject.GetComponent<Slider>().value = soundCube.spread;
+            //}
+            //if (trans.name == "SliderMinDistance")
+            //{
+            //    trans.gameObject.GetComponent<Slider>().value = soundCube.minDistance;
+            //}
+            //if (trans.name == "SliderMaxDistance")
+            //{
+            //    trans.gameObject.GetComponent<Slider>().value = soundCube.maxDistance;
+            //}
+        }
+
+    }
+    //Spread is interegr from 1 to 6
+    public void updateMaxDistance(float value)
     {
         getAudioSource(soundObjectName);
         foreach (Transform trans in soundMenu.GetComponentInChildren<Transform>())
@@ -275,6 +394,10 @@ public class SoundMenuInteractions : MonoBehaviour
             if (trans.name == "SliderMaxDistance")
             {
                 source.maxDistance = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
+            }
+            if (trans.name == "TextMaxDistanceValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(value).ToString();
             }
         }
     }
@@ -301,8 +424,7 @@ public class SoundMenuInteractions : MonoBehaviour
         masterMixer.SetFloat("BGMasterVolume", value);
         float output;
         masterMixer.GetFloat("BGMasterVolume", out output);
-        Debug.Log("Master Background Volume is:" + output);
-
+        //Debug.Log("Master Background Volume is:" + output);
     }
 
     public void setBGMusicVolume(float value)

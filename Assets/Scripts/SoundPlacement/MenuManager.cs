@@ -12,12 +12,14 @@ public class MenuManager : MonoBehaviour
     public GameObject soundMenu;
     public GameObject audioMixerMenu;
     string activeMenuName;
+    string activeObjectName;
     SoundMenuInteractions soundMenuInteractionsScript;
     public AudioMixer masterMixer;
 
     private void Awake()
     {
         activeMenuName = "";
+        activeObjectName = "";
         soundMenuInteractionsScript = this.GetComponent<SoundMenuInteractions>();
         Debug.Log("Sound Menu Interaction Script is " + soundMenuInteractionsScript);
     }
@@ -35,12 +37,28 @@ public class MenuManager : MonoBehaviour
         {
 
             case "SoundMenu":
+
                 if(activeMenuName.Equals("SoundMenu"))
                 {
+                    if (activeObjectName != objectName)
+                    {
+                        canvasMenu.SetActive(false);
+                        audioMixerMenu.SetActive(false);
+                        soundMenu.SetActive(true);
+                        soundMenuInteractionsScript.SoundObjectName = objectName;
 
-                    soundMenu.SetActive(false);
-                    soundMenuInteractionsScript.SoundObjectName = "";
-                    activeMenuName = "";
+                        setMenuValues("SoundMenu");
+                        activeMenuName = "SoundMenu";
+                        activeObjectName = objectName;
+                    }
+                    else
+                    {
+                        soundMenu.SetActive(false);
+                        soundMenuInteractionsScript.SoundObjectName = "";
+
+                        activeMenuName = "";
+                        activeObjectName = "";
+                    }
                 }
                 else
                 {
@@ -51,6 +69,7 @@ public class MenuManager : MonoBehaviour
 
                     setMenuValues("SoundMenu");
                     activeMenuName = "SoundMenu";
+                    activeObjectName = objectName;
                 }
                 break;
             case "CanvasMenu":
@@ -60,6 +79,7 @@ public class MenuManager : MonoBehaviour
                     canvasMenu.SetActive(false);
                     soundMenuInteractionsScript.SoundObjectName = "";
                     activeMenuName = "";
+                    activeObjectName = "";
 
                 }
                 else
@@ -69,15 +89,16 @@ public class MenuManager : MonoBehaviour
                     canvasMenu.SetActive(true);
                     soundMenuInteractionsScript.SoundObjectName = "";
                     activeMenuName = "CanvasMenu";
+                    activeObjectName = "";
                 }
                 break;
             case "AudioMixerMenu":
                 if (activeMenuName.Equals("AudioMixerMenu"))
                 {
-                    audioMixerMenu.SetActive(false);
-                    soundMenuInteractionsScript.SoundObjectName = "";
-                    activeMenuName = "";
-
+                        audioMixerMenu.SetActive(false);
+                        soundMenuInteractionsScript.SoundObjectName = "";
+                        activeMenuName = "";
+                        activeObjectName = "";
                 }
                 else
                 {
@@ -87,6 +108,7 @@ public class MenuManager : MonoBehaviour
                     soundMenuInteractionsScript.SoundObjectName = "";
                     activeMenuName = "AudioMixerMenu";
                     setAudioMixerMenuValues();
+                    activeObjectName = "";
                 }
                 break;
 
@@ -100,27 +122,27 @@ public class MenuManager : MonoBehaviour
             {
                 float output;
                 masterMixer.GetFloat("BGMasterVolume", out output);
-                trans.gameObject.GetComponent<Slider>().value = output;
+                trans.gameObject.GetComponent<Slider>().value = output;                
 
             }
             if (trans.name == "SliderBGMusic")
             {
                 float output;
-                masterMixer.GetFloat("BGMasterVolume", out output);
+                masterMixer.GetFloat("BGMusicolume", out output);
                 trans.gameObject.GetComponent<Slider>().value = output;
 
             }
             if (trans.name == "SliderBGChatter")
             {
                 float output;
-                masterMixer.GetFloat("BGMasterVolume", out output);
+                masterMixer.GetFloat("BGChatterVolume", out output);
                 trans.gameObject.GetComponent<Slider>().value = output;
 
             }
             if (trans.name == "SliderBGAirCon")
             {
                 float output;
-                masterMixer.GetFloat("BGMasterVolume", out output);
+                masterMixer.GetFloat("BGAColume", out output);
                 trans.gameObject.GetComponent<Slider>().value = output;
 
             }
@@ -181,7 +203,43 @@ public class MenuManager : MonoBehaviour
                     }
                     if (trans.name == "TextVolumeValue")
                     {
-                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.volume.ToString();
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.volume.ToString("0.00");
+                    }
+                    if (trans.name == "TextPriorityValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.priority.ToString();
+                    }
+                    if (trans.name == "TextPitchValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.pitch.ToString("0.00");
+                    }
+                    if (trans.name == "TextStereoPanValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.panStereo.ToString("0.00");
+                    }
+                    if (trans.name == "TextSpatialBlendValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.spatialBlend.ToString("0.00");
+                    }
+                    if (trans.name == "TextReverbMixValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.reverbZoneMix.ToString("0.00");
+                    }
+                    if (trans.name == "TextDopplerLevelValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.dopplerLevel.ToString("0.00");
+                    }
+                    if (trans.name == "TextSpreadValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.spread.ToString(); 
+                    }
+                    if (trans.name == "TextMinDistanceValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.minDistance.ToString();
+                    }
+                    if (trans.name == "TextMaxDistanceValue")
+                    {
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.maxDistance.ToString();
                     }
                     if (trans.name == "Dropdown")
                     {
