@@ -32,12 +32,12 @@
         {
             if (e.target)
             {
-                script.ObjectsDelete.Add(e.target.name.ToString());
+                script.ObjectTouchedForLooping.Add(e.target.name.ToString());
                 if (GameObject.Find(e.target.name.ToString()) != null)
                 { 
                     GameObject.Find(e.target.name.ToString()).GetComponent<Rigidbody>().isKinematic = false;
                 }
-                Debug.Log("Target Object Touched is" + e.target);
+                Debug.Log("Target Object Touched for looping  is" + e.target);
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TOUCHING", e.target);
             }
         }
@@ -50,8 +50,8 @@
                 {
                     GameObject.Find(e.target.name.ToString()).GetComponent<Rigidbody>().isKinematic = true;
                 }
-                script.ObjectsDelete.Remove(e.target.name.ToString());  
-                Debug.Log("Target Object Not Touched is" + e.target);
+                script.ObjectTouchedForLooping.Remove(e.target.name.ToString());  
+                Debug.Log("Target Object Not for looping  is" + e.target);
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "NO LONGER TOUCHING", e.target);
             }
         }

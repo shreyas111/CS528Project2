@@ -58,8 +58,6 @@
             objectSize = 0f;
             triggerPressed = false;
             TriggerCounter = 0;
-
-
         }
         void Update()
         {
@@ -674,13 +672,18 @@
         {
             if (buttonTwoButtonEvents)
             {
-                if(script.ObjectsDelete.Count>0)
+                if(script.ObjectTouchedForLooping.Count>0)
                 {
-                    string objectToDeleteName = script.ObjectsDelete[0];
-                    if (GameObject.Find(objectToDeleteName) != null)
+                    string ObjectTouchedForLooping = script.ObjectTouchedForLooping[0];
+                    if (GameObject.Find(ObjectTouchedForLooping) != null)
                     {
-                        Destroy(GameObject.Find(objectToDeleteName));
-                        script.ObjectsDelete.Remove(objectToDeleteName);
+                        AudioSource audioS = GameObject.Find(ObjectTouchedForLooping).GetComponent<AudioSource>();
+                        if (audioS != null)
+                        {
+                            audioS.loop = !audioS.loop;
+                        }
+                        //Destroy(GameObject.Find(objectToDeleteName));
+                        //script.ObjectsDelete.Remove(objectToDeleteName);
                     }
                 }
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON TWO", "pressed down", e);

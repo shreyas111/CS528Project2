@@ -6,16 +6,17 @@ using UnityEngine;
 public class ObjectCounter : MonoBehaviour
 {
     private static int _counter;
-    public string _soundPathRoot;
+    //public string _soundPathRoot;
     public ObjectProperties[] _objectProperties;
-    public List<string> objectsDelete; 
+    public List<string> objectsDelete;
+    public List<string> objectTouchedForLooping;
 
 
 
     private void Awake()
     {
         _counter = 0;
-        _soundPathRoot = "file://" + Application.streamingAssetsPath + "/Sounds/";
+        //_soundPathRoot = "file://" + Application.streamingAssetsPath + "/Sounds/";
         objectsDelete = new List<string>();
     }
 
@@ -30,17 +31,17 @@ public class ObjectCounter : MonoBehaviour
             _counter = value;
         }
     }
-    public string SoundPathRoot
-    {
-        get
-        {
-            return _soundPathRoot;
-        }
-        set
-        {
-            _soundPathRoot = value;
-        }
-    }
+    //public string SoundPathRoot
+    //{
+    //    get
+    //    {
+    //        return _soundPathRoot;
+    //    }
+    //    set
+    //    {
+    //        _soundPathRoot = value;
+    //    }
+    //}
 
     public ObjectProperties[] ObjectProperties
     {
@@ -62,6 +63,17 @@ public class ObjectCounter : MonoBehaviour
         set
         {
             objectsDelete = value;
+        }
+    }
+    public List<string> ObjectTouchedForLooping
+    {
+        get
+        {
+            return objectTouchedForLooping;
+        }
+        set
+        {
+            objectTouchedForLooping = value;
         }
     }
 }

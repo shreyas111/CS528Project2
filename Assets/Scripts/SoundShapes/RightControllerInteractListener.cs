@@ -3,6 +3,12 @@
     using UnityEngine;
     public class RightControllerInteractListener : MonoBehaviour
     {
+
+        ObjectCounter script;
+        private void Awake()
+        {
+            script = GameObject.Find("HolderObject").GetComponent<ObjectCounter>();
+        }
         private void Start()
         {
             if (GetComponent<VRTK_InteractTouch>() == null || GetComponent<VRTK_InteractGrab>() == null)
@@ -26,7 +32,13 @@
         private void DoInteractTouch(object sender, ObjectInteractEventArgs e)
         {
             if (e.target)
-            {            
+            {
+                script.ObjectsDelete.Add(e.target.name.ToString());
+                if (GameObject.Find(e.target.name.ToString()) != null)
+                {
+                    GameObject.Find(e.target.name.ToString()).GetComponent<Rigidbody>().isKinematic = false;
+                }
+                Debug.Log("Target Object Touched is" + e.target);
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TOUCHING", e.target);
             }
         }
@@ -35,6 +47,12 @@
         {
             if (e.target)
             {
+                if (GameObject.Find(e.target.name.ToString()) != null)
+                {
+                    GameObject.Find(e.target.name.ToString()).GetComponent<Rigidbody>().isKinematic = true;
+                }
+                script.ObjectsDelete.Remove(e.target.name.ToString());
+                Debug.Log("Target Object Not Touched is" + e.target);
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "NO LONGER TOUCHING", e.target);
             }
         }

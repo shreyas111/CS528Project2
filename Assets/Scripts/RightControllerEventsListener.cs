@@ -8,6 +8,9 @@
     {
         bool canvasMenuActive;
         public GameObject CanvasMenu;
+
+        ObjectCounter script;        
+
         public enum EventQuickSelect
         {
             Custom,
@@ -111,6 +114,7 @@
         void Awake()
         {
             canvasMenuActive = false;
+            script = GameObject.Find("HolderObject").GetComponent<ObjectCounter>();            
         }
 
         private void OnDisable()
@@ -331,6 +335,16 @@
         {
             if (triggerButtonEvents)
             {
+                if (script.ObjectsDelete.Count > 0)
+                {
+                    string objectToDeleteName = script.ObjectsDelete[0];
+                    if (GameObject.Find(objectToDeleteName) != null)
+                    {
+                        script.ObjectTouchedForLooping.Remove(objectToDeleteName);
+                        Destroy(GameObject.Find(objectToDeleteName));
+                        script.ObjectsDelete.Remove(objectToDeleteName);
+                    }
+                }
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TRIGGER", "clicked", e);
             }
         }
