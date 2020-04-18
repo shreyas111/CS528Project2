@@ -4,6 +4,9 @@
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine.Networking;
+    using VRTK.Examples;
+    using UnityEngine.UI;
+    using TMPro;
 
     public class LeftControllerEventsListener : MonoBehaviour
     {
@@ -11,7 +14,16 @@
         private float objectSize;
         bool triggerPressed;
         private int TriggerCounter;
-       
+
+        
+        public GameObject audioMenu;
+        public GameObject CanvasMenu;
+        public bool audioMenuActive;
+        RightControllerEventsListener script1;
+
+        public string nameOfObjectWhoseAudioMenuOpen;
+
+
 
         public enum EventQuickSelect
         {
@@ -58,6 +70,11 @@
             objectSize = 0f;
             triggerPressed = false;
             TriggerCounter = 0;
+
+            audioMenuActive = false;
+            script1=GameObject.Find("RightController").GetComponent<RightControllerEventsListener>();
+
+            nameOfObjectWhoseAudioMenuOpen = "";
         }
         void Update()
         {
@@ -680,13 +697,109 @@
                         AudioSource audioS = GameObject.Find(ObjectTouchedForLooping).GetComponent<AudioSource>();
                         if (audioS != null)
                         {
-                            audioS.loop = !audioS.loop;
+                            //audioS.loop = !audioS.loop;
+
+                            if (script1.canvasMenuActive)
+                            {
+                                script1.canvasMenuActive = false;
+                                CanvasMenu.SetActive(false);
+                            }
+                            audioMenuActive = !audioMenuActive;
+                            if (audioMenuActive)
+                            {
+                                nameOfObjectWhoseAudioMenuOpen = ObjectTouchedForLooping;
+                            }
+                            else
+                            {
+                                nameOfObjectWhoseAudioMenuOpen = "";
+                            }
+                            audioMenu.SetActive(audioMenuActive);
+
+                            foreach (Transform trans in audioMenu.GetComponentInChildren<Transform>())
+                            {
+                                if (trans.name == "VolumeSlider")
+                                {
+                                    trans.gameObject.GetComponent<Slider>().value = audioS.volume;
+                                }
+                                if (trans.name == "LoopToggle")
+                                {
+                                    trans.gameObject.GetComponent<Toggle>().enabled = audioS.loop;
+                                }
+                                if (trans.name == "NameText")
+                                {
+                                    trans.gameObject.GetComponent<TextMeshProUGUI>().text = nameOfObjectWhoseAudioMenuOpen;
+                                }
+                                if (trans.name == "PlayPauseButton")
+                                {
+                                    if (audioS.isPlaying)
+                                    {
+                                        trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Pause";
+                                        
+                                    }
+                                    else
+                                    {
+                                        trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Play";
+                                    }
+
+                                }
+                                //if (trans.name == "StopButton")
+                                //{
+                                //    trans.gameObject.GetComponent<TextMeshProUGUI>().text = nameOfObjectWhoseAudioMenuOpen;
+                                //}
+                            }
+
                         }
-                        //Destroy(GameObject.Find(objectToDeleteName));
-                        //script.ObjectsDelete.Remove(objectToDeleteName);
+                        ////Destroy(GameObject.Find(objectToDeleteName));
+                        ////script.ObjectsDelete.Remove(objectToDeleteName);
                     }
                 }
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON TWO", "pressed down", e);
+            }
+        }
+        public void UpdateVolume(float value)
+        {
+            AudioSource audioS = GameObject.Find(nameOfObjectWhoseAudioMenuOpen).GetComponent<AudioSource>();
+            foreach (Transform trans in audioMenu.GetComponentInChildren<Transform>())
+            {
+                if (trans.name == "VolumeSlider")
+                {
+                    audioS.volume = trans.gameObject.GetComponent<Slider>().value;
+                }
+            }
+        }
+
+        public void UpdateLoop(bool value)
+        {
+
+            Debug.Log("UpdateLoop Value is" + value);
+            AudioSource audioS = GameObject.Find(nameOfObjectWhoseAudioMenuOpen).GetComponent<AudioSource>();
+            foreach (Transform trans in audioMenu.GetComponentInChildren<Transform>())
+            {
+                if (trans.name == "LoopToggle")
+                {
+                    audioS.loop = value;
+                }
+            }
+        }
+
+        public void UpdatePlay()
+        {
+            AudioSource audioS = GameObject.Find(nameOfObjectWhoseAudioMenuOpen).GetComponent<AudioSource>();
+            foreach (Transform trans in audioMenu.GetComponentInChildren<Transform>())
+            {
+                if (trans.name == "PlayPauseButton")
+                {
+                    if(trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text.Equals("Play"))
+                    {
+                        audioS.Play();
+                        trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Pause";
+                    }
+                    else
+                    {
+                        audioS.Pause();
+                        trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Play";
+                    }
+                }
             }
         }
 

@@ -6,10 +6,15 @@
 
     public class RightControllerEventsListener : MonoBehaviour
     {
-        bool canvasMenuActive;
+        public bool canvasMenuActive;
         public GameObject CanvasMenu;
 
-        ObjectCounter script;        
+        ObjectCounter script;
+
+        public GameObject AudioMenu;
+        LeftControllerEventsListener script1;
+
+    
 
         public enum EventQuickSelect
         {
@@ -114,7 +119,9 @@
         void Awake()
         {
             canvasMenuActive = false;
-            script = GameObject.Find("HolderObject").GetComponent<ObjectCounter>();            
+            script = GameObject.Find("HolderObject").GetComponent<ObjectCounter>();
+
+            script1 = GameObject.Find("LeftController").GetComponent<LeftControllerEventsListener>(); ;
         }
 
         private void OnDisable()
@@ -340,9 +347,23 @@
                     string objectToDeleteName = script.ObjectsDelete[0];
                     if (GameObject.Find(objectToDeleteName) != null)
                     {
-                        script.ObjectTouchedForLooping.Remove(objectToDeleteName);
-                        Destroy(GameObject.Find(objectToDeleteName));
-                        script.ObjectsDelete.Remove(objectToDeleteName);
+                        AudioSource audioS = GameObject.Find(objectToDeleteName).GetComponent<AudioSource>();
+                        if (audioS != null)
+                        {
+                            if (script1.audioMenuActive)
+                            {
+
+                                if (script1.nameOfObjectWhoseAudioMenuOpen.Equals(objectToDeleteName))
+                                {
+                                    script1.audioMenuActive = false;
+                                    script1.nameOfObjectWhoseAudioMenuOpen = "";
+                                    AudioMenu.SetActive(false);
+                                }
+                            }
+                            script.ObjectTouchedForLooping.Remove(objectToDeleteName);
+                            Destroy(GameObject.Find(objectToDeleteName));
+                            script.ObjectsDelete.Remove(objectToDeleteName);
+                        }
                     }
                 }
                 DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TRIGGER", "clicked", e);
@@ -537,6 +558,13 @@
         {
             if (buttonTwoButtonEvents)
             {
+
+                if (script1.audioMenuActive)
+                {
+                    script1.audioMenuActive = false;
+                    script1.nameOfObjectWhoseAudioMenuOpen = ""; 
+                    AudioMenu.SetActive(false);
+                }
 
                 canvasMenuActive = !canvasMenuActive;
                 CanvasMenu.SetActive(canvasMenuActive);
