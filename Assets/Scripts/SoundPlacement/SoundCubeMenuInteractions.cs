@@ -24,11 +24,11 @@ public class SoundCubeMenuInteractions : MonoBehaviour
         
     }
 
-    public void enableDisableMenu()
-    {
-        Debug.Log("Menu Enabled and disbaled");
+    //public void enableDisableMenu()
+    //{
+    //    Debug.Log("Menu Enabled and disbaled");
 
-    }
+    //}
     private void getAudioSource(string objectName)
     {
         source = GameObject.Find(objectName).GetComponent<AudioSource>();
@@ -36,7 +36,7 @@ public class SoundCubeMenuInteractions : MonoBehaviour
     }
     public void playPause(string objectName)
     {
-        Debug.Log("Hello");
+       
         getAudioSource(objectName);
         if (source.isPlaying)
         {

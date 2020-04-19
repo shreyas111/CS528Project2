@@ -326,6 +326,7 @@ public class SoundMenuInteractions : MonoBehaviour
             if (trans.name == "SliderVolume")
             {
                 trans.gameObject.GetComponent<Slider>().value = 1f;
+                source.volume = 1f;
             }
             if (trans.name == "TextVolumeValue")
             {
@@ -335,7 +336,8 @@ public class SoundMenuInteractions : MonoBehaviour
 
             if (trans.name == "SliderPitch")
             {
-                trans.gameObject.GetComponent<Slider>().value = 1;
+                trans.gameObject.GetComponent<Slider>().value = 1f;
+                source.pitch = 1f;
             }
             if (trans.name == "TextPitchValue")
             {
@@ -346,6 +348,7 @@ public class SoundMenuInteractions : MonoBehaviour
             if (trans.name == "SliderPriority")
             {
                 trans.gameObject.GetComponent<Slider>().value = Convert.ToInt32(128);
+                source.priority = Convert.ToInt32(128);
             }
             if (trans.name == "TextPriorityValue")
             {
@@ -353,34 +356,87 @@ public class SoundMenuInteractions : MonoBehaviour
             }
 
 
-            //if (trans.name == "SliderStereoPan")
-            //{
-            //    trans.gameObject.GetComponent<Slider>().value = soundCube.panStereo;
-            //}
-            //if (trans.name == "SliderSpatialBlend")
-            //{
-            //    trans.gameObject.GetComponent<Slider>().value = soundCube.spatialBlend;
-            //}
-            //if (trans.name == "SliderReverbMix")
-            //{
-            //    trans.gameObject.GetComponent<Slider>().value = soundCube.reverbZoneMix;
-            //}
-            //if (trans.name == "SliderDopplerLevel")
-            //{
-            //    trans.gameObject.GetComponent<Slider>().value = soundCube.dopplerLevel;
-            //}
-            //if (trans.name == "SliderSpread")
-            //{
-            //    trans.gameObject.GetComponent<Slider>().value = soundCube.spread;
-            //}
-            //if (trans.name == "SliderMinDistance")
-            //{
-            //    trans.gameObject.GetComponent<Slider>().value = soundCube.minDistance;
-            //}
-            //if (trans.name == "SliderMaxDistance")
-            //{
-            //    trans.gameObject.GetComponent<Slider>().value = soundCube.maxDistance;
-            //}
+            if (trans.name == "SliderStereoPan")
+            {
+                trans.gameObject.GetComponent<Slider>().value = 0f;
+                source.panStereo = 0f;
+            }
+            if (trans.name == "TextStereoPanValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = 0f.ToString();
+            }
+
+            if (trans.name == "SliderSpatialBlend")
+            {
+                trans.gameObject.GetComponent<Slider>().value = 1f;
+                source.spatialBlend = 1f;
+            }
+            if (trans.name == "TextSpatialBlendValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = 1f.ToString();
+            }
+
+
+
+            if (trans.name == "SliderReverbMix")
+            {
+                trans.gameObject.GetComponent<Slider>().value = 1f;
+                source.reverbZoneMix = 1f;
+            }
+            if (trans.name == "TextReverbMixValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = 1f.ToString();
+            }
+
+
+
+            if (trans.name == "SliderDopplerLevel")
+            {
+                trans.gameObject.GetComponent<Slider>().value = 1f;
+                source.dopplerLevel = 1f;
+            }
+            if (trans.name == "TextDopplerLevelValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = 1f.ToString();
+            }
+
+
+            if (trans.name == "SliderSpread")
+            {
+                trans.gameObject.GetComponent<Slider>().value = Convert.ToInt32(0);
+                source.spread = 1f;
+            }
+            if (trans.name == "TextSpreadValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(0).ToString();
+            }
+
+
+            if (trans.name == "SliderMinDistance")
+            {
+                trans.gameObject.GetComponent<Slider>().value = Convert.ToInt32(1);
+                source.minDistance = 1;
+            }
+            if (trans.name == "TextMinDistanceValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(1).ToString();
+            }
+
+            if (trans.name == "SliderMaxDistance")
+            {
+                trans.gameObject.GetComponent<Slider>().value = Convert.ToInt32(20);
+                source.maxDistance = 20;
+            }
+            if (trans.name == "TextMaxDistanceValue")
+            {
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(20).ToString();
+            }
+
+            if (trans.name == "Dropdown")
+            {
+                trans.gameObject.GetComponent<TMP_Dropdown>().value = 0;
+                source.rolloffMode = AudioRolloffMode.Linear;
+            }
         }
 
     }
