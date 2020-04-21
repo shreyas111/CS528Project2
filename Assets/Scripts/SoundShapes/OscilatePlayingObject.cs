@@ -10,6 +10,9 @@ public class OscilatePlayingObject : MonoBehaviour
     float oscilationRange;
     float oscilationOffset;
 
+    //float timer = 0.0f;
+    //int seconds;
+
     AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
@@ -31,17 +34,29 @@ public class OscilatePlayingObject : MonoBehaviour
 
         oscilationOffset = oscilationRange + startRange;
         Debug.Log("Oscilation Offset is" + oscilationOffset);
+
+        audioSource = this.GetComponent<AudioSource>();
+        audioSource.volume = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        audioSource = this.GetComponent<AudioSource>();
+        //timer += Time.deltaTime;
+        //int seconds = (int)timer % 60;
+        //if (seconds % 14 == 0 && audioSource.isPlaying)
+        //{
+        //    Color OriginalColor = this.GetComponent<Renderer>().material.color;
+        //    this.GetComponent<Renderer>().material.color = Color.blue;
+        //    //this.GetComponent<Renderer>().material.color = OriginalColor;
+        //}
+
         if (audioSource.isPlaying)
         {
             Oscilate();
         }
+
     }
 
     private void Oscilate()

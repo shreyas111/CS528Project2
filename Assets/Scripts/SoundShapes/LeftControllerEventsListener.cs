@@ -22,6 +22,8 @@
         RightControllerEventsListener script1;
 
         public string nameOfObjectWhoseAudioMenuOpen;
+        //public Material originalMatOfObjectWhoseMenuIsOpen;
+        //public Material materialforObjectWhoseMenuisOpen;
 
 
 
@@ -445,7 +447,7 @@
                     shape.GetComponent<Rigidbody>().isKinematic = true;
 
                     shapeRenderer = shape.GetComponent<Renderer>();
-                    shapeRenderer.material.color = objectProperties.Color;
+                    shapeRenderer.material = objectProperties.Mat;
                     
                     shapeAudioSource = shape.AddComponent<AudioSource>();
                     loadSound(shapeAudioSource, objectProperties);
@@ -458,6 +460,8 @@
                     shape.GetComponent<VRTK.GrabAttachMechanics.VRTK_FixedJointGrabAttach>().enabled = true;
                     shape.AddComponent<VRTK.SecondaryControllerGrabActions.VRTK_SwapControllerGrabAction>();
                     shape.GetComponent<VRTK.SecondaryControllerGrabActions.VRTK_SwapControllerGrabAction>().enabled = true;
+
+                    shape.AddComponent<VRTK_InteractObjectHighlighter>();
 
 
                     //StartCoroutine(loadSound(script.SoundPathRoot,objectProperties.AudioClipName));
@@ -474,7 +478,7 @@
                     shape.GetComponent<Rigidbody>().isKinematic = true;
 
                     shapeRenderer = shape.GetComponent<Renderer>();
-                    shapeRenderer.material.color = objectProperties.Color;
+                    shapeRenderer.material = objectProperties.Mat;
 
                     shapeAudioSource = shape.AddComponent<AudioSource>();
                     loadSound(shapeAudioSource, objectProperties);
@@ -488,6 +492,7 @@
                     shape.AddComponent<VRTK.SecondaryControllerGrabActions.VRTK_SwapControllerGrabAction>();
                     shape.GetComponent<VRTK.SecondaryControllerGrabActions.VRTK_SwapControllerGrabAction>().enabled = true;
 
+                    shape.AddComponent<VRTK_InteractObjectHighlighter>();
                     //shape.AddComponent<VRTK_InteractObjectHighlighter>();
                     //shape.GetComponent<VRTK_InteractObjectHighlighter>().enabled = true;
                     //shape.AddComponent<VRTK.UnityEventHelper.VRTK_InteractObjectHighlighter_UnityEvents>();
@@ -708,9 +713,13 @@
                             if (audioMenuActive)
                             {
                                 nameOfObjectWhoseAudioMenuOpen = ObjectTouchedForLooping;
+                                //originalMatOfObjectWhoseMenuIsOpen = GameObject.Find(nameOfObjectWhoseAudioMenuOpen).GetComponent<Renderer>().material;
+                                //GameObject.Find(nameOfObjectWhoseAudioMenuOpen).GetComponent<Renderer>().material = materialforObjectWhoseMenuisOpen;
                             }
                             else
                             {
+                                //GameObject.Find(nameOfObjectWhoseAudioMenuOpen).GetComponent<Renderer>().material = originalMatOfObjectWhoseMenuIsOpen;
+                                //originalMatOfObjectWhoseMenuIsOpen = null;
                                 nameOfObjectWhoseAudioMenuOpen = "";
                             }
                             audioMenu.SetActive(audioMenuActive);
@@ -723,7 +732,7 @@
                                 }
                                 if (trans.name == "LoopToggle")
                                 {
-                                    trans.gameObject.GetComponent<Toggle>().enabled = audioS.loop;
+                                    trans.gameObject.GetComponent<Toggle>().isOn = audioS.loop;
                                 }
                                 if (trans.name == "NameText")
                                 {
@@ -742,10 +751,19 @@
                                     }
 
                                 }
-                                //if (trans.name == "StopButton")
-                                //{
-                                //    trans.gameObject.GetComponent<TextMeshProUGUI>().text = nameOfObjectWhoseAudioMenuOpen;
-                                //}
+                                if (trans.name == "StopButton")
+                                {
+                                    if (!audioS.isPlaying)
+                                    {
+                                        trans.gameObject.GetComponent<Button>().enabled = false;
+                                        //trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Stop";
+                                    }
+                                    else
+                                    {
+                                        trans.gameObject.GetComponent<Button>().enabled = true;
+                                    }
+                                  
+                                }
                             }
 
                         }
@@ -789,7 +807,7 @@
             {
                 if (trans.name == "PlayPauseButton")
                 {
-                    if(trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text.Equals("Play"))
+                    if (trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text.Equals("Play"))
                     {
                         audioS.Play();
                         trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Pause";
@@ -799,6 +817,45 @@
                         audioS.Pause();
                         trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Play";
                     }
+                }
+                if (trans.name == "StopButton")
+                {
+                    if (!audioS.isPlaying)
+                    {
+                        trans.gameObject.GetComponent<Button>().enabled = false;
+                        //trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Stop";
+                    }
+                    else
+                    {
+                        trans.gameObject.GetComponent<Button>().enabled = true;
+                    }
+
+                }
+            }
+        }
+
+        public void UpdateStop()
+        {
+            AudioSource audioS = GameObject.Find(nameOfObjectWhoseAudioMenuOpen).GetComponent<AudioSource>();
+            audioS.Stop();
+            foreach (Transform trans in audioMenu.GetComponentInChildren<Transform>())
+            {
+                if (trans.name == "PlayPauseButton")
+                {
+                        trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Play";                   
+                }
+                if (trans.name == "StopButton")
+                {
+                    if (!audioS.isPlaying)
+                    {
+                        trans.gameObject.GetComponent<Button>().enabled = false;
+                        //trans.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Stop";
+                    }
+                    else
+                    {
+                        trans.gameObject.GetComponent<Button>().enabled = true;
+                    }
+
                 }
             }
         }
@@ -900,6 +957,26 @@
         {
             Debug.Log("Radial Menu Button Four Pressed");
             script.Counter = 3;
+        }
+        public void RadialMenuButtonFive()
+        {
+            Debug.Log("Radial Menu Button Five Pressed");
+            script.Counter = 4;
+        }
+        public void RadialMenuButtonSix()
+        {
+            Debug.Log("Radial Menu Button Six Pressed");
+            script.Counter = 5;
+        }
+        public void RadialMenuButtonSeven()
+        {
+            Debug.Log("Radial Menu Button Seven Pressed");
+            script.Counter = 6;
+        }
+        public void RadialMenuButtonEight()
+        {
+            Debug.Log("Radial Menu Button Seven Pressed");
+            script.Counter = 7;
         }
     }
 }

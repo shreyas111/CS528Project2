@@ -6,6 +6,9 @@ public class ObjectProperties
 {
     public string _shape;
     public Color _color;
+    public Material _mat;
+
+
     public string _audioClipName;
     public bool _isAudioLooped;
     [SerializeField]
@@ -32,6 +35,18 @@ public class ObjectProperties
         set
         {
             _color = value;
+        }
+    }
+
+    public Material Mat
+    {
+        get
+        {
+            return _mat;
+        }
+        set
+        {
+            _mat = value;
         }
     }
 
