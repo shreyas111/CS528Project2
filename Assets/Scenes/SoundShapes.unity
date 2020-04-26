@@ -4629,7 +4629,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 110, y: 20}
+  m_SizeDelta: {x: 300, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &842949230
 MonoBehaviour:
@@ -11981,48 +11981,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectProperties:
   - _shape: Sphere
+    _colorName: Red
     _color: {r: 1, g: 0, b: 0, a: 0}
     _mat: {fileID: 2100000, guid: 11ebccb8d1531864eb464d6012372b0c, type: 2}
     _audioClipName: Music1BaseMelody.wav
     _isAudioLooped: 1
     _audioClip: {fileID: 8300000, guid: dda5f1d582b0d9642a587f176c3d80eb, type: 3}
   - _shape: Sphere
+    _colorName: Yellow
     _color: {r: 1, g: 1, b: 0.14901961, a: 0}
     _mat: {fileID: 2100000, guid: 840d130a59bf7634e965a0972a69295b, type: 2}
     _audioClipName: Music1Sound2.wav
     _isAudioLooped: 1
     _audioClip: {fileID: 8300000, guid: 2f6b6e6c3527fd14b95d47d9c8252280, type: 3}
   - _shape: Sphere
+    _colorName: Purple
     _color: {r: 1, g: 0.015686275, b: 1, a: 0}
     _mat: {fileID: 2100000, guid: 75dc595ed20065142a1b3f124249486d, type: 2}
     _audioClipName: Music1Sound3.wav
     _isAudioLooped: 1
     _audioClip: {fileID: 8300000, guid: fed1e1b1f3b8f1e49b18e11097bf50ad, type: 3}
   - _shape: Sphere
+    _colorName: Blue
     _color: {r: 0, g: 0, b: 1, a: 0}
     _mat: {fileID: 2100000, guid: 1695248a798feda4691d30de86ed259d, type: 2}
     _audioClipName: Music1Sound4.wav
     _isAudioLooped: 1
     _audioClip: {fileID: 8300000, guid: 207bd99ab19fa6146a3ef4b42e72edf9, type: 3}
   - _shape: Cube
+    _colorName: Green
     _color: {r: 0.10588236, g: 1, b: 0.10588236, a: 0}
     _mat: {fileID: 2100000, guid: 50b6a92a159007441b6f58d7edaa50d5, type: 2}
     _audioClipName: Music2Sound1.wav
     _isAudioLooped: 1
     _audioClip: {fileID: 8300000, guid: 5d620561f42f6f040976722d19a1c9c2, type: 3}
   - _shape: Cube
+    _colorName: Blue
     _color: {r: 0.007843138, g: 0.007843138, b: 1, a: 0}
     _mat: {fileID: 2100000, guid: 1695248a798feda4691d30de86ed259d, type: 2}
     _audioClipName: Music2Sound2.wav
     _isAudioLooped: 1
     _audioClip: {fileID: 8300000, guid: 61d8d421ce86d864c82fde1ed5b01e28, type: 3}
   - _shape: Cube
+    _colorName: White
     _color: {r: 1, g: 1, b: 1, a: 0}
     _mat: {fileID: 2100000, guid: ac57a096baa15be49bc4b8ebdd1be853, type: 2}
     _audioClipName: Music3Sound3.wav
     _isAudioLooped: 1
     _audioClip: {fileID: 8300000, guid: e1be12fbdb769cf4fa9685f6f72583a1, type: 3}
   - _shape: Cube
+    _colorName: Purple
     _color: {r: 1, g: 0.03529412, b: 1, a: 0}
     _mat: {fileID: 2100000, guid: 75dc595ed20065142a1b3f124249486d, type: 2}
     _audioClipName: Muisc4Sound4.wav

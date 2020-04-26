@@ -453,7 +453,7 @@
 
                 case "Cube":
                     shape = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    shape.name = "soundObject" + TriggerCounter;
+                    shape.name = script.ObjectProperties[script.Counter].ColorName + " Cube " + TriggerCounter;
                     //shape.transform.position = new Vector3(0f, 0f, 0f);
                     shape.transform.position = GameObject.Find("CreationLocation").GetComponent<Transform>().position;
                     shape.transform.localScale = new Vector3(objectSize, objectSize, objectSize);
@@ -484,8 +484,8 @@
                     break;
 
                 case "Sphere":
-                    shape = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    shape.name = "soundObject" + TriggerCounter;
+                    shape = GameObject.CreatePrimitive(PrimitiveType.Sphere);            
+                    shape.name = script.ObjectProperties[script.Counter].ColorName + " Sphere " + TriggerCounter;
                     shape.transform.position = GameObject.Find("CreationLocation").GetComponent<Transform>().position;
                     shape.transform.localScale = new Vector3(objectSize, objectSize, objectSize);
 

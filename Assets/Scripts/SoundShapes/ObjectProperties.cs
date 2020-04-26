@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectProperties
 {
     public string _shape;
+    public string _colorName;
     public Color _color;
     public Material _mat;
 
@@ -23,6 +24,18 @@ public class ObjectProperties
         set
         {
             _shape = value;
+        }
+    }
+
+    public string ColorName
+    {
+        get
+        {
+            return _colorName;
+        }
+        set
+        {
+            _colorName = value;
         }
     }
 
