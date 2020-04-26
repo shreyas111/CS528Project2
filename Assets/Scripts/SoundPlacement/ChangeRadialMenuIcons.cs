@@ -16,7 +16,7 @@ public class ChangeRadialMenuIcons : MonoBehaviour
     {
         audioSource = this.transform.parent.parent.parent.gameObject.GetComponent<AudioSource>();
         a = this.GetComponent<VRTK_RadialMenu>();
-        Debug.Log("Name is: " + audioSource.gameObject.name);
+     
     }
     void Start()
     {

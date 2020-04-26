@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
         activeMenuName = "";
         activeObjectName = "";
         soundMenuInteractionsScript = this.GetComponent<SoundMenuInteractions>();
-        Debug.Log("Sound Menu Interaction Script is " + soundMenuInteractionsScript);
+        //Debug.Log("Sound Menu Interaction Script is " + soundMenuInteractionsScript);
     }
 
     public void activateDeactivateMenus(string parameters)
@@ -235,11 +235,11 @@ public class MenuManager : MonoBehaviour
                     }
                     if (trans.name == "TextMinDistanceValue")
                     {
-                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.minDistance.ToString();
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.minDistance.ToString("0.00");
                     }
                     if (trans.name == "TextMaxDistanceValue")
                     {
-                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.maxDistance.ToString();
+                        trans.gameObject.GetComponent<TextMeshProUGUI>().text = soundCube.maxDistance.ToString("0.00");
                     }
                     if (trans.name == "Dropdown")
                     {

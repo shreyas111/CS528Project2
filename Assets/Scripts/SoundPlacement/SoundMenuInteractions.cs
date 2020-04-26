@@ -308,11 +308,13 @@ public class SoundMenuInteractions : MonoBehaviour
         {
             if (trans.name == "SliderMinDistance")
             {
-                source.minDistance = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
+                //source.minDistance = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
+                source.minDistance = Mathf.Round(trans.gameObject.GetComponent<Slider>().value * 100f)/100f;                
             }
             if (trans.name == "TextMinDistanceValue")
             {
-                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(value).ToString();
+                //trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(value).ToString();
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString("0.00");
             }
         }
 
@@ -414,22 +416,25 @@ public class SoundMenuInteractions : MonoBehaviour
 
             if (trans.name == "SliderMinDistance")
             {
-                trans.gameObject.GetComponent<Slider>().value = Convert.ToInt32(1);
-                source.minDistance = 1;
+                trans.gameObject.GetComponent<Slider>().value = 1f;
+                source.minDistance = 1f;
             }
             if (trans.name == "TextMinDistanceValue")
             {
-                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(1).ToString();
+                //trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(1).ToString();
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = 1f.ToString();
             }
 
             if (trans.name == "SliderMaxDistance")
             {
-                trans.gameObject.GetComponent<Slider>().value = Convert.ToInt32(20);
-                source.maxDistance = 20;
+                // trans.gameObject.GetComponent<Slider>().value = Convert.ToInt32(20);
+                trans.gameObject.GetComponent<Slider>().value = 20f;
+                source.maxDistance = 20f;
             }
             if (trans.name == "TextMaxDistanceValue")
             {
-                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(20).ToString();
+                //trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(20).ToString();
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = 20f.ToString();
             }
 
             if (trans.name == "Dropdown")
@@ -449,11 +454,13 @@ public class SoundMenuInteractions : MonoBehaviour
             //Debug.Log("Distance is Max" + trans.gameObject.GetComponent<Slider>().value);
             if (trans.name == "SliderMaxDistance")
             {
-                source.maxDistance = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
+                //source.maxDistance = Convert.ToInt32(trans.gameObject.GetComponent<Slider>().value);
+                source.maxDistance = Mathf.Round(trans.gameObject.GetComponent<Slider>().value * 100f) / 100f;
             }
             if (trans.name == "TextMaxDistanceValue")
             {
-                trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(value).ToString();
+                //trans.gameObject.GetComponent<TextMeshProUGUI>().text = Convert.ToInt32(value).ToString();
+                trans.gameObject.GetComponent<TextMeshProUGUI>().text = value.ToString("0.00");
             }
         }
     }

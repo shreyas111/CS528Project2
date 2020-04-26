@@ -9,14 +9,17 @@ public class InformationTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-      
-        if(other.name=="Head")
+
+        //Debug.Log(other.name);
+        if(other.name== "[VRTK][AUTOGEN][FootColliderContainer]")
         informationCanvas.SetActive(true);
     }
     void OnTriggerExit(Collider other)
     {
-        
-        if (other.name == "Head")
+
+
+        //if (other.name == "[VRTK][AUTOGEN][BodyColliderContainer]")
+        if (other.name == "[VRTK][AUTOGEN][FootColliderContainer]")
             informationCanvas.SetActive(false);
     }
 

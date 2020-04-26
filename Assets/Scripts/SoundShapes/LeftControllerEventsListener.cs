@@ -22,6 +22,19 @@
         RightControllerEventsListener script1;
 
         public string nameOfObjectWhoseAudioMenuOpen;
+
+        public GameObject circleMarker;
+        public GameObject cubeMarker;
+
+        public Material circleMaterial1;
+        public Material circleMaterial2;
+        public Material circleMaterial3;
+        public Material circleMaterial4;
+        public Material cubeMaterial1;
+        public Material cubeMaterial2;
+        public Material cubeMaterial3;
+        public Material cubeMaterial4;
+
         //public Material originalMatOfObjectWhoseMenuIsOpen;
         //public Material materialforObjectWhoseMenuisOpen;
 
@@ -77,6 +90,9 @@
             script1=GameObject.Find("RightController").GetComponent<RightControllerEventsListener>();
 
             nameOfObjectWhoseAudioMenuOpen = "";
+
+            circleMarker.GetComponent<Renderer>().material = circleMaterial1;
+            cubeMarker.SetActive(false);
         }
         void Update()
         {
@@ -940,43 +956,75 @@
         }
         public void RadialMenuButtonOne()
         {
-            Debug.Log("Radial Menu Button One Pressed");
+            //Debug.Log("Radial Menu Button One Pressed");
             script.Counter = 0;
+
+            circleMarker.SetActive(true);            
+            circleMarker.GetComponent<Renderer>().material = circleMaterial1;
+            cubeMarker.SetActive(false);
         }
         public void RadialMenuButtonTwo()
         {
-            Debug.Log("Radial Menu Button Two Pressed");
+            //Debug.Log("Radial Menu Button Two Pressed");
             script.Counter = 1;
+
+            circleMarker.SetActive(true);
+            circleMarker.GetComponent<Renderer>().material = circleMaterial2;
+            cubeMarker.SetActive(false);
         }
         public void RadialMenuButtonThree()
         {
-            Debug.Log("Radial Menu Button Three Pressed");
+            //Debug.Log("Radial Menu Button Three Pressed");
             script.Counter = 2;
+
+            circleMarker.SetActive(true);
+            circleMarker.GetComponent<Renderer>().material = circleMaterial3;
+            cubeMarker.SetActive(false);
         }
         public void RadialMenuButtonFour()
         {
-            Debug.Log("Radial Menu Button Four Pressed");
+            //Debug.Log("Radial Menu Button Four Pressed");
             script.Counter = 3;
+
+            circleMarker.SetActive(true);
+            circleMarker.GetComponent<Renderer>().material = circleMaterial4;
+            cubeMarker.SetActive(false);
         }
         public void RadialMenuButtonFive()
         {
-            Debug.Log("Radial Menu Button Five Pressed");
+            //Debug.Log("Radial Menu Button Five Pressed");
             script.Counter = 4;
+
+            cubeMarker.SetActive(true);
+            cubeMarker.GetComponent<Renderer>().material = cubeMaterial1;
+            circleMarker.SetActive(false);
         }
         public void RadialMenuButtonSix()
         {
-            Debug.Log("Radial Menu Button Six Pressed");
+            //Debug.Log("Radial Menu Button Six Pressed");
             script.Counter = 5;
+
+            cubeMarker.SetActive(true);
+            cubeMarker.GetComponent<Renderer>().material = cubeMaterial2;
+            circleMarker.SetActive(false);
         }
         public void RadialMenuButtonSeven()
         {
-            Debug.Log("Radial Menu Button Seven Pressed");
+            //Debug.Log("Radial Menu Button Seven Pressed");
             script.Counter = 6;
+
+            cubeMarker.SetActive(true);
+            cubeMarker.GetComponent<Renderer>().material = cubeMaterial3;
+            circleMarker.SetActive(false);
         }
         public void RadialMenuButtonEight()
         {
-            Debug.Log("Radial Menu Button Seven Pressed");
+            //Debug.Log("Radial Menu Button Seven Pressed");
             script.Counter = 7;
+
+            cubeMarker.SetActive(true);
+            cubeMarker.GetComponent<Renderer>().material = cubeMaterial4;
+            circleMarker.SetActive(false);
         }
     }
 }
