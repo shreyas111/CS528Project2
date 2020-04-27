@@ -1,11 +1,21 @@
 # CS528Project2
-CS528Project2 Sound in VR
+CS528Project2 Sound in Virtual Reality
 
-# Resources:
-##Icons
-1. Menu Icon: https://icons8.com/icons/set/menu
-2. Play Icon: https://icons8.com/icons/set/play
-3. Pause Icon: https://icons8.com/icons/set/pause
-4. Stop Icon: https://icons8.com/icons/set/stop
-5. Replay Icon: https://icons8.com/icons/set/replay
-6. Loop Icon: https://icons8.com/icons/set/loop
+This project was created as a part of the course work requirement for CS 528 taken at University of Illinois at Chicago in Spring 2020. The project was developed using Unity and allows the user to explore and manipulate sounds in virtual reality via the HTC Vive platform.
+
+The project is developed on Unity Version 2019.2.11f .
+
+# Important Links
+
+1. Website:
+2. Youtube Video:
+
+
+# How to Run:
+
+1. Download the version of unity mentioned from https://unity3d.com/get-unity/download/archive
+2. Download Steam VR from https://store.steampowered.com/steamvr
+3. Download or clone the project.
+4. Once the project is download go to the following path: CS528Project2/Assets/Scenes/ and open the SoundPlacement Unity Scene File.
+5. Run the SoundPlacement Unity Scene File.
+Note: By default the project should run on the desktop using the simulator. If the HTC Vive is connected make sure Steam is running and the project should run on the HTC Vive.
