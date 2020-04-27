@@ -6,9 +6,7 @@ The project is developed on **Unity Version 2019.2.11f**.
 
 # Important Links
 
-1. Website:
-2. Youtube Video:
-
+1. Website: https://sites.google.com/view/cs528shreyas/project-2?authuser=0#h.hbpfduvamq69
 
 # How to Run:
 
