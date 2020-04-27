@@ -3,7 +3,7 @@ CS528Project2: Sounds in Virtual Reality
 
 This project was created as a part of the course work requirement for CS 528 taken at University of Illinois at Chicago in Spring 2020. The project was developed using Unity and allows the user to explore and manipulate sounds in virtual reality via the HTC Vive platform.
 
-The project is developed on Unity Version 2019.2.11f .
+The project is developed on **Unity Version 2019.2.11f**.
 
 # Important Links
 
